@@ -18,7 +18,7 @@ namespace SwagLabsTest
 
             myDriver.Navigate().GoToUrl("https://www.saucedemo.com/");
 
-            Assert.That(myDriver.Title, Is.EqualTo("Swag Labs"));
+            Assert.That(myDriver.Title, Is.EqualTo("Swag Labs"), "Swag Labs page not found");
         }
 
         [TearDown]
