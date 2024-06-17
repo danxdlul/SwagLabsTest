@@ -17,16 +17,22 @@ namespace SwagLabsTest
             Assert.That(addToCartButton.Enabled, Is.True);
             Assert.That(addToCartButton.Text, Is.EqualTo("Add to cart"));
             addToCartButton.Click();
+            Thread.Sleep(3000);
+            addToCartButton = myDriver.FindElement(By.Id("remove-sauce-labs-backpack"));
             var cartCount = myDriver.FindElement(By.ClassName("shopping_cart_badge"));
             Assert.That(cartCount.Text, Is.EqualTo("1"));
             Assert.That(addToCartButton.Text, Is.EqualTo("Remove"));
             myDriver.FindElement(By.Id("shopping_cart_container")).Click();
+            Thread.Sleep(3000);
             myDriver.FindElement(By.Id("checkout")).Click();
+            Thread.Sleep(3000);
             myDriver.FindElement(By.Id("first-name")).SendKeys("Daniel");
             myDriver.FindElement(By.Id("last-name")).SendKeys("Kasa");
             myDriver.FindElement(By.Id("postal-code")).SendKeys("2112");
             myDriver.FindElement(By.Id("continue")).Click();
+            Thread.Sleep(3000);
             myDriver.FindElement(By.Id("finish")).Click();
+            Thread.Sleep(3000);
             Assert.That(myDriver.FindElement(By.ClassName("complete-header")).Text, Is.EqualTo("Thank you for your order!"));
 
 

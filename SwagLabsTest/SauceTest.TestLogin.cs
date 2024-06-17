@@ -20,10 +20,13 @@ namespace SwagLabsTest
             Assert.That(myDriver.FindElement(By.Id("login-button")).Displayed, Is.True);
             myDriver.FindElement(By.Id("login-button")).Click();
 
-            Assert.That(myDriver.FindElement(By.Id("user-name")).Displayed, Is.False);
-            Assert.That(myDriver.FindElement(By.Id("password")).Displayed, Is.False);
-            Assert.That(myDriver.FindElement(By.Id("login-button")).Displayed, Is.False);
+            Thread.Sleep(5000);
+
+            Assert.Throws<NoSuchElementException>(() => myDriver.FindElement(By.Id("user-name")));
+            Assert.Throws<NoSuchElementException>(() => myDriver.FindElement(By.Id("password")));
+            Assert.Throws<NoSuchElementException>(() => myDriver.FindElement(By.Id("login-button")));
             Assert.That(myDriver.FindElement(By.Id("inventory_container")).Displayed, Is.True);
+            Assert.That(myDriver.FindElement(By.ClassName("inventory_item")).Displayed, Is.True);
         }
     }
 }

@@ -1,5 +1,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
+using System.Collections.ObjectModel;
 
 namespace SwagLabsTest
 {
@@ -20,18 +21,14 @@ namespace SwagLabsTest
             Assert.That(myDriver.Title, Is.EqualTo("Swag Labs"));
         }
 
-        [SetUp]
-        public void SetUp()
-        {
-            myDriver.FindElement(By.Id("react-burger-menu-btn")).Click();
-            myDriver.FindElement(By.Id("inventory_sidebar_link")).Click();
-        }
-
         [TearDown]
         public void TearDown()
         {
             myDriver.FindElement(By.Id("react-burger-menu-btn")).Click();
+            Thread.Sleep(5000);
             myDriver.FindElement(By.Id("reset_sidebar_link")).Click();
+            myDriver.FindElement(By.Id("inventory_sidebar_link")).Click();
+            Thread.Sleep(2000);
         }
 
         [OneTimeTearDown]
@@ -39,6 +36,11 @@ namespace SwagLabsTest
         {
             myDriver.Quit();
             myDriver.Dispose();
+        }
+        private ReadOnlyCollection<IWebElement> GetInventoryItems()
+        {
+            return myDriver.FindElement(By.Id("inventory_container"))
+                             .FindElements(By.ClassName("inventory_item"));
         }
     }
 }
